@@ -1,0 +1,21 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8801/eureka/
+server:
+  port: 8806
+spring:
+  application:
+    name: service-zuul
+zuul:
+  routes:
+    api-a:
+      path: /api-a/**
+      serviceId: ribbon-consumer
+    api-b:
+      path: /api-b/**
+      serviceId: feign-consumer
+
+#zuul起到了路由的作用
+#以/api-a/ 开头的请求都转发给ribbon-consumer服务；
+#以/api-b/开头的请求都转发给feign-consumer服务；
